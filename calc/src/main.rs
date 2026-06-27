@@ -28,26 +28,28 @@ fn main() {
         return
     }
 
-    //parse args to float
-    let num1 = args[1].parse::<f64>();
-    let num2 = args[3].parse::<f64>();
+    //checks that num1 is valid
+    let num1 = match args[1].parse::<f64>() {
+        Ok(r) => r,
+        Err(_e) => {
+            println!("invalid number for first number");
+            return
+        }
+    };
 
-    //check first num valid
-    match num1 {
-        Ok(aa) => {
-            //check second num valid
-            match num2 {
-                Ok(bb) => {
-                    //both numbers valid, check operator and do correct equation
-                    let result: Option<f64> = do_math(aa, bb, &args[2]);
-                    //if operator was valid, result was returned and print it
-                    if let Some(xx) = result {
-                        println!("-> {} {} {} = {}", aa, args[2], bb, xx);
-                    }
-                },
-                Err(_e) => println!("error with first number") 
-            };
-        },
-        Err(_e) => println!("error with second number") 
+    //checks that num2 is valid
+    let num2 = match args[3].parse::<f64>() {
+        Ok(r) => r,
+        Err(_e) => {
+            println!("invalid number for second number");
+            return
+        } 
+    };
+
+    //both numbers valid, check operator and do correct equation
+    let result: Option<f64> = do_math(num1, num2, &args[2]);
+    //if operator was valid, result was returned and print it
+    if let Some(xx) = result {
+        println!("-> {} {} {} = {}", num1, args[2], num2, xx);
     }
 }
