@@ -6,6 +6,22 @@ Simulates a Pokemon battle in the command line
 - File handling
 - Stdin
 
+## Credit
+
+- list of pokemon from pokemondb
+- list can also be found from killshot13 on github
+- pokemon info from bulbapedia
+
+## Python script
+
+There is over 1000 pokemon and entering in all those stats would
+be very annoying. I have been getting the information previously
+from bulbapedia and thought I could scrape the pages since all the
+URLs are the same besides the pokemon name. I got a list of all
+names, loop through it, and scrape each page for the stats. Sadly
+the table does not have tags on the website, hence why numbers are
+found with the title and I have to call next a ton.  
+
 *TODO*
 
 Currently can open files and read each line.
