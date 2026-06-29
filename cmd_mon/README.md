@@ -29,3 +29,9 @@ being loaded from the dex and not the team. Main is getting too big.
 How the team file is being opened seems a bit weird but it works how
 I want it to (it opens in the function every time, it should close
 itself though once the function finishes since it is out of scope?).
+
+*6/29*
+
+Fixed the UI a bit. Made it so it you select a starter it add it to
+the team vec. Cleaned up the code. Also found out you can iterate
+over multiple iterators in a for loop which was very helpful. 
