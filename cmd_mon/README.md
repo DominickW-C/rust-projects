@@ -22,6 +22,13 @@ names, loop through it, and scrape each page for the stats. Sadly
 the table does not have tags on the website, hence why numbers are
 found with the title and I have to call next a ton.  
 
+#### v2
+
+The first had tons of problem with space in names, and HP/Attack
+being mentioned before the stats table. Fixed this to pull from only
+the table. It's messy but it works, probably won't clean up cause it
+was a one time script to save time.
+
 *TODO*
 
 Currently can open files and read each line.
