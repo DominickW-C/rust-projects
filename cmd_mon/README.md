@@ -58,3 +58,12 @@ itself though once the function finishes since it is out of scope?).
 Fixed the UI a bit. Made it so it you select a starter it add it to
 the team vec. Cleaned up the code. Also found out you can iterate
 over multiple iterators in a for loop which was very helpful. 
+
+*7/12*
+
+Added catching mechanic. This is based off of the gen 3 and 4 catching
+system as it seemed straightforward to implement. Pop if battle ends since
+a wild battle should always only have one Pokemon. No different pokeballs yet.
+Will probaly go back and update to add the ball shaking. Also updated Python
+script to find catch rates. Really messy but it works and it's a run once and
+forget about it thing.

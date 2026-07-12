@@ -1,12 +1,13 @@
 pub struct Pokemon {
     pub current_hp: i32,
     pub name: String,
-    pub hp: i16,
-    pub attack: i16,
-    pub defense: i16,
-    pub sp_attack: i16,
-    pub sp_def: i16,
-    pub speed: i16
+    pub hp: i32,
+    pub attack: i32,
+    pub defense: i32,
+    pub sp_attack: i32,
+    pub sp_def: i32,
+    pub speed: i32,
+    pub catch_rate: i32
 }
 
 pub fn print_team(team: &[Pokemon]) {
@@ -20,49 +21,59 @@ pub fn print_team(team: &[Pokemon]) {
         println!("SP Attack: {}", mon.sp_attack);
         println!("SP Defense: {}", mon.sp_def);
         println!("Speed: {}", mon.speed);
+        //NOTE: For debugging
+        println!("Catch Rate: {}", mon.catch_rate);
     }
 }
 
-pub fn con_mon(mon_data: &[&str]) -> Pokemon {
-    let hp = match mon_data[1].parse::<i16>() {
+pub fn con_mon(mon_str: &str) -> Pokemon {
+    let mon_data: Vec<&str> = mon_str.split(',').collect();
+    let hp = match mon_data[1].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing hp to int {e}");
             0
         }
     };
-    let attack = match mon_data[2].parse::<i16>() {
+    let attack = match mon_data[2].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing attack to int {e}");
             0
         }
     };
-    let defense = match mon_data[3].parse::<i16>() {
+    let defense = match mon_data[3].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing defense to int {e}");
             0
         }
     };
-    let sp_attack = match mon_data[4].parse::<i16>() {
+    let sp_attack = match mon_data[4].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing sp_attack to int {e}");
             0
         }
     };
-    let sp_def = match mon_data[5].parse::<i16>() {
+    let sp_def = match mon_data[5].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing sp_def to int {e}");
             0
         }
     };
-    let speed = match mon_data[6].parse::<i16>() {
+    let speed = match mon_data[6].parse::<i32>() {
         Ok(r) => r,
         Err(e) => {
             println!("trouble parsing speed to int {e}");
+            0
+        }
+    };
+    let catch_rate = match mon_data[7].parse::<i32>() {
+        Ok(r) => r,
+        Err(e) => {
+            println!("Trouble parsing catch rate to int {e}");
             0
         }
     };
@@ -75,6 +86,7 @@ pub fn con_mon(mon_data: &[&str]) -> Pokemon {
         defense,
         sp_attack,
         sp_def,
-        speed
+        speed,
+        catch_rate
     }
 }

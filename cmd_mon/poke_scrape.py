@@ -5,6 +5,31 @@ import re
 allPokemon = open("./pokemonList.txt")
 dex = open("./src/pokeInfo/pokedex.csv", "a")
 
+last_dex_num = 0
+catch_index = 2
+catch_resp = requests.get(
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pokémon_by_catch_rate")
+
+if catch_resp.status_code == 200:
+    catch_doc = catch_resp.text
+    catch_soup = BeautifulSoup(catch_doc, "html.parser")
+    table = catch_soup.find("table")
+    table_soup = BeautifulSoup(table.prettify(), "html.parser")
+    table_lines = table_soup.find_all("tr")
+
+
+def catch_stat():
+    global last_dex_num
+    global catch_index
+    data = table_lines[catch_index].find_all("td")
+    while data[0].text.strip() == last_dex_num:
+        catch_index += 1
+        data = table_lines[catch_index].find_all("td")
+    last_dex_num = data[0].text.strip()
+    catch_index += 1
+    return data[3].text.strip()
+
+
 while True:
     pokemon = allPokemon.readline().strip()
     if pokemon == "":
@@ -45,6 +70,7 @@ while True:
                 break
             ret_string += "," + stat.next.next.next.next.next.next.next.text.strip()
             base_check += 1
+        ret_string += "," + catch_stat()
         ret_string += '\n'
         print(ret_string)
         dex.write(ret_string)
