@@ -2,6 +2,9 @@
 
 Simulates a Pokemon battle in the command line
 
+If you run the data scripts, headers for files will be needed
+I'll eventually add those
+
 ## Takeaways
 - File handling
 - Stdin
@@ -67,3 +70,12 @@ a wild battle should always only have one Pokemon. No different pokeballs yet.
 Will probaly go back and update to add the ball shaking. Also updated Python
 script to find catch rates. Really messy but it works and it's a run once and
 forget about it thing.
+
+*8/2*
+
+Added a file and edited script to track the moves a pokemon knows.
+None of the python scripts are optimized since they only need to work once.
+Stopped pushing data files since they are repetitive, you can just run the 
+script. Also added a script to track move information, didn't realize that 
+was not pushed yet.
+

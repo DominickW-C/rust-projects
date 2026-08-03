@@ -1,9 +1,12 @@
+# Multiple Soups are probably not needed but they work
+
 import requests
 from bs4 import BeautifulSoup
 import re
 
 allPokemon = open("./pokemonList.txt")
 dex = open("./src/pokeInfo/pokedex.csv", "a")
+monMoves = open("./src/pokeInfo/movesByMon.csv", "a")
 
 last_dex_num = 0
 catch_index = 2
@@ -43,6 +46,41 @@ while True:
     if resp.status_code == 200:
         doc = resp.text
         soup = BeautifulSoup(doc, "html.parser")
+
+        # moves
+        movesRet = pokemon
+        moves = soup.find(id="By_leveling_up")
+        while moves.name != "table":
+            moves = moves.next
+        movesRow = moves.find_all("tr")
+        skip = 0
+        for row in movesRow:
+            moveInfo = row.find_all("td")
+            if len(moveInfo) < 6:
+                continue
+            if skip == 0:
+                skip = 1
+                continue
+            movesRet += "," + moveInfo[1].text.strip()
+            movesRet += "," + moveInfo[0].text[2:].strip()
+            movesRet += '\n'
+            monMoves.write(movesRet)
+            movesRet = pokemon
+
+        # tm moves
+        tmMoves = soup.find(id=re.compile("By_TM"))
+        while tmMoves.name != "table":
+            tmMoves = tmMoves.next
+        tmMovesRow = tmMoves.find_all("tr")
+        for row in tmMovesRow:
+            tmMoveInfo = row.find_all("td")
+            if len(tmMoveInfo) < 6:
+                continue
+            movesRet += "," + tmMoveInfo[2].text.strip()
+            movesRet += "," + "-"
+            movesRet += '\n'
+            monMoves.write(movesRet)
+            movesRet = pokemon
 
         # name
         name = soup.find(id="firstHeading")
